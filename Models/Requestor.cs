@@ -5,13 +5,13 @@ using WatchdogApi.Models;
 
 namespace WatchdogApi.Models
 {
-  public class AssignPerson
+  public class Requestor
   {
 
     public int Id { get; set; }
 
     [Required]
-    public string AssignRole { get; set; }
+    public string RequestRole { get; set; }
 
 
   }

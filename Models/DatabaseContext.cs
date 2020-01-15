@@ -16,6 +16,8 @@ namespace WatchdogApi.Models
 
     public DbSet<AssignPerson> AssignPersons { get; set; }
 
+    public DbSet<Requestor> Requestors { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.Entity<Scope>().HasData(
@@ -33,11 +35,18 @@ namespace WatchdogApi.Models
       );
 
       modelBuilder.Entity<AssignPerson>().HasData(
-               new AssignPerson { Id = 1, Role = "Owner" },
-               new AssignPerson { Id = 2, Role = "Architect" },
-               new AssignPerson { Id = 3, Role = "General Contractor" },
-               new AssignPerson { Id = 4, Role = "Subcontractor" }
+               new AssignPerson { Id = 1, AssignRole = "Owner" },
+               new AssignPerson { Id = 2, AssignRole = "Architect" },
+               new AssignPerson { Id = 3, AssignRole = "General Contractor" },
+               new AssignPerson { Id = 4, AssignRole = "Subcontractor" }
       );
+
+      modelBuilder.Entity<Requestor>().HasData(
+          new Requestor { Id = 1, RequestRole = "Owner" },
+          new Requestor { Id = 2, RequestRole = "Architect" },
+          new Requestor { Id = 3, RequestRole = "General Contractor" },
+          new Requestor { Id = 4, RequestRole = "Subcontractor" }
+ );
 
     }
 
@@ -66,6 +75,8 @@ namespace WatchdogApi.Models
     }
 
     public DbSet<WatchdogApi.Models.AssignPerson> AssignPerson { get; set; }
+
+    public DbSet<WatchdogApi.Models.Requestor> Requestor { get; set; }
 
 
 
