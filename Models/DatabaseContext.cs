@@ -18,6 +18,8 @@ namespace WatchdogApi.Models
 
     public DbSet<Requestor> Requestors { get; set; }
 
+     public DbSet<PunchListItem> PunchListItems { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
       modelBuilder.Entity<Scope>().HasData(
@@ -74,9 +76,6 @@ namespace WatchdogApi.Models
       }
     }
 
-    public DbSet<WatchdogApi.Models.AssignPerson> AssignPerson { get; set; }
-
-    public DbSet<WatchdogApi.Models.Requestor> Requestor { get; set; }
 
 
 

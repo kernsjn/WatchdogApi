@@ -24,14 +24,14 @@ namespace WatchdogApi.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<AssignPerson>>> GetAssignPerson()
         {
-            return await _context.AssignPerson.ToListAsync();
+            return await _context.AssignPersons.ToListAsync();
         }
 
         // GET: api/AssignPerson/5
         [HttpGet("{id}")]
         public async Task<ActionResult<AssignPerson>> GetAssignPerson(int id)
         {
-            var assignPerson = await _context.AssignPerson.FindAsync(id);
+            var assignPerson = await _context.AssignPersons.FindAsync(id);
 
             if (assignPerson == null)
             {
@@ -79,7 +79,7 @@ namespace WatchdogApi.Controllers
         [HttpPost]
         public async Task<ActionResult<AssignPerson>> PostAssignPerson(AssignPerson assignPerson)
         {
-            _context.AssignPerson.Add(assignPerson);
+            _context.AssignPersons.Add(assignPerson);
             await _context.SaveChangesAsync();
 
             return CreatedAtAction("GetAssignPerson", new { id = assignPerson.Id }, assignPerson);
@@ -89,13 +89,13 @@ namespace WatchdogApi.Controllers
         [HttpDelete("{id}")]
         public async Task<ActionResult<AssignPerson>> DeleteAssignPerson(int id)
         {
-            var assignPerson = await _context.AssignPerson.FindAsync(id);
+            var assignPerson = await _context.AssignPersons.FindAsync(id);
             if (assignPerson == null)
             {
                 return NotFound();
             }
 
-            _context.AssignPerson.Remove(assignPerson);
+            _context.AssignPersons.Remove(assignPerson);
             await _context.SaveChangesAsync();
 
             return assignPerson;
@@ -103,7 +103,7 @@ namespace WatchdogApi.Controllers
 
         private bool AssignPersonExists(int id)
         {
-            return _context.AssignPerson.Any(e => e.Id == id);
+            return _context.AssignPersons.Any(e => e.Id == id);
         }
     }
 }
