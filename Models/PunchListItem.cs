@@ -10,37 +10,32 @@ namespace WatchdogApi.Models
 
     public int Id { get; set; }
 
-    public int FacilityId { get; set; }
 
     public string Issue { get; set; }
 
     public string IssueLocation { get; set; }
 
-    public enum Status
-{
-    Pending,
-    Open,
-    InReview,
-    Closed
-}
+    public Status Status { get; set; } = Status.Pending;
 
-    public Facility Facilities { get; set; }
+    public int FacilityId { get; set; }
+
+    public Facility Facility { get; set; }
 
     public int BuildingId { get; set; }
 
-    public Building Buildings { get; set; }
+    public Building Building { get; set; }
 
     public int ScopeId { get; set; }
 
-    public Scope Scopes { get; set; }
+    public Scope Scope { get; set; }
 
     public int AssignId { get; set; }
 
-    public AssignPerson AssignPersons { get; set; }
+    public AssignPerson AssignPerson { get; set; }
 
     public int RequestId { get; set; }
 
-    public Requestor Requestors { get; set; }
+    public Requestor Requestor { get; set; }
 
 
   }
