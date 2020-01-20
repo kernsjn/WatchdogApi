@@ -53,7 +53,6 @@ namespace WatchdogApi.Models
     }
 
 
-
     private string ConvertPostConnectionToConnectionString(string connection)
     {
       var _connection = connection.Replace("postgres://", String.Empty);

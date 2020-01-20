@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using WatchdogApi.Models;
 
+
 namespace WatchdogApi.Models
 {
   public class PunchListItem
@@ -14,6 +15,7 @@ namespace WatchdogApi.Models
     public string Issue { get; set; }
 
     public string IssueLocation { get; set; }
+
 
     public Status Status { get; set; } = Status.Pending;
 
