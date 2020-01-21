@@ -39,7 +39,10 @@ namespace WatchdogApi.Controllers
     [HttpGet]
     public async Task<ActionResult<IEnumerable<PunchListItem>>> GetPunchListItems()
     {
-      return await _context.PunchListItems.ToListAsync();
+      return await _context.PunchListItems.Include(i => i.Facility)
+                .Include(i => i.Building)
+                .Include(i => i.Scope)
+                .Include(i => i.AssignPerson).ToListAsync();
     }
 
     // GET: api/PunchListItem/5
