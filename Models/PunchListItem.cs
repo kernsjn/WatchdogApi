@@ -31,7 +31,7 @@ namespace WatchdogApi.Models
 
     public Scope Scope { get; set; }
 
-    public int AssignId { get; set; }
+    public int AssignPersonId { get; set; }
 
     public AssignPerson AssignPerson { get; set; }
 

@@ -29,7 +29,7 @@ namespace WatchdogApi.Controllers
                 .Include(i => i.Building)
                 .Include(i => i.Scope)
                 .Include(i => i.AssignPerson)
-                .Where(w => w.FacilityId == facilityId && w.BuildingId == buildingId && w.ScopeId == scopeId && w.AssignId == assignId);
+                .Where(w => w.FacilityId == facilityId && w.BuildingId == buildingId && w.ScopeId == scopeId && w.AssignPersonId == assignId);
 
 
       return Ok(await punchListItem.ToListAsync());
