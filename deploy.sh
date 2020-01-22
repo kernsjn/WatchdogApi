@@ -1,7 +1,7 @@
-docker build -t sdg-sample-api-template .
+docker build -t wgs-watchdog .
 
-docker tag sdg-sample-api-template registry.heroku.com/sdg-sample-api-template/web
+docker tag wgs-watchdog registry.heroku.com/wgs-watchdog/web
 
-docker push registry.heroku.com/sdg-sample-api-template/web
+docker push registry.heroku.com/wgs-watchdog/web
 
-heroku container:release web -a sdg-sample-api-template
+heroku container:release web -a wgs-watchdog
