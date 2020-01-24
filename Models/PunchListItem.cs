@@ -16,6 +16,8 @@ namespace WatchdogApi.Models
 
     public string IssueLocation { get; set; }
 
+    public string Resolution { get; set; }
+
 
     public Status Status { get; set; } = Status.Pending;
 
