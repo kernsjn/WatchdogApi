@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using WatchdogApi.Models;
@@ -9,9 +10,10 @@ using WatchdogApi.Models;
 namespace WatchdogApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20200127150647_RevisedPunchTable")]
+    partial class RevisedPunchTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -121,7 +123,10 @@ namespace WatchdogApi.Migrations
                     b.Property<string>("IssueLocation")
                         .HasColumnType("text");
 
-                    b.Property<int>("RequestorId")
+                    b.Property<int>("RequestId")
+                        .HasColumnType("integer");
+
+                    b.Property<int?>("RequestorId")
                         .HasColumnType("integer");
 
                     b.Property<string>("Resolution")
@@ -288,9 +293,7 @@ namespace WatchdogApi.Migrations
 
                     b.HasOne("WatchdogApi.Models.Requestor", "Requestor")
                         .WithMany()
-                        .HasForeignKey("RequestorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RequestorId");
 
                     b.HasOne("WatchdogApi.Models.Scope", "Scope")
                         .WithMany()

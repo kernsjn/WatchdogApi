@@ -49,20 +49,20 @@ namespace WatchdogApi.Controllers
     [HttpGet("{id}")]
     public async Task<ActionResult<PunchListItem>> GetPunchListItem(int id)
     {
-      var punchListItem = _context.PunchListItems
+      var punchListItem = await _context.PunchListItems
                 .Include(i => i.Facility)
                 .Include(i => i.Building)
                 .Include(i => i.Scope)
                 .Include(i => i.Requestor)
                 .Include(i => i.AssignPerson)
-                .Where(w => w.Id == id);
+                .FirstOrDefaultAsync(w => w.Id == id);
 
       if (punchListItem == null)
       {
         return NotFound();
       }
 
-      return Ok(await punchListItem.ToListAsync());
+      return Ok(punchListItem);
     }
 
     // PUT: api/PunchListItem/5
