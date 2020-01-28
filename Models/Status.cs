@@ -9,6 +9,7 @@ namespace WatchdogApi.Models
   {
     Pending,
     Open,
+
     InReview,
     Closed
   }
