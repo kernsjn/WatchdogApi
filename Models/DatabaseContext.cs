@@ -18,7 +18,7 @@ namespace WatchdogApi.Models
 
     public DbSet<Requestor> Requestors { get; set; }
 
-     public DbSet<PunchListItem> PunchListItems { get; set; }
+    public DbSet<PunchListItem> PunchListItems { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -66,7 +66,7 @@ namespace WatchdogApi.Models
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
         // #warning Update this connection string to point to your own database.
-        var conn = "server=localhost;database=WatchdogApiDatabase";
+        var conn = "server=localhost;database=WatchdogApiDatabase2";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
