@@ -10,8 +10,8 @@ using WatchdogApi.Models;
 namespace WatchdogApi.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20200114210122_AddedAssignPersonTable")]
-    partial class AddedAssignPersonTable
+    [Migration("20200131164841_Deployment")]
+    partial class Deployment
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,34 +28,34 @@ namespace WatchdogApi.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Role")
+                    b.Property<string>("AssignRole")
                         .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.ToTable("AssignPerson");
+                    b.ToTable("AssignPersons");
 
                     b.HasData(
                         new
                         {
                             Id = 1,
-                            Role = "Owner"
+                            AssignRole = "Owner"
                         },
                         new
                         {
                             Id = 2,
-                            Role = "Architect"
+                            AssignRole = "Architect"
                         },
                         new
                         {
                             Id = 3,
-                            Role = "General Contractor"
+                            AssignRole = "General Contractor"
                         },
                         new
                         {
                             Id = 4,
-                            Role = "Subcontractor"
+                            AssignRole = "Subcontractor"
                         });
                 });
 
@@ -99,6 +99,93 @@ namespace WatchdogApi.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Facilities");
+                });
+
+            modelBuilder.Entity("WatchdogApi.Models.PunchListItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<int>("AssignPersonId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("BuildingId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("FacilityId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Issue")
+                        .HasColumnType("text");
+
+                    b.Property<string>("IssueLocation")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RequestorId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Resolution")
+                        .HasColumnType("text");
+
+                    b.Property<int>("ScopeId")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AssignPersonId");
+
+                    b.HasIndex("BuildingId");
+
+                    b.HasIndex("FacilityId");
+
+                    b.HasIndex("RequestorId");
+
+                    b.HasIndex("ScopeId");
+
+                    b.ToTable("PunchListItems");
+                });
+
+            modelBuilder.Entity("WatchdogApi.Models.Requestor", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<string>("RequestRole")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Requestors");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            RequestRole = "Owner"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            RequestRole = "Architect"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            RequestRole = "General Contractor"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            RequestRole = "Subcontractor"
+                        });
                 });
 
             modelBuilder.Entity("WatchdogApi.Models.Scope", b =>
@@ -179,6 +266,39 @@ namespace WatchdogApi.Migrations
                     b.HasOne("WatchdogApi.Models.Facility", "Facilities")
                         .WithMany("Buildings")
                         .HasForeignKey("FacilityId");
+                });
+
+            modelBuilder.Entity("WatchdogApi.Models.PunchListItem", b =>
+                {
+                    b.HasOne("WatchdogApi.Models.AssignPerson", "AssignPerson")
+                        .WithMany()
+                        .HasForeignKey("AssignPersonId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WatchdogApi.Models.Building", "Building")
+                        .WithMany()
+                        .HasForeignKey("BuildingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WatchdogApi.Models.Facility", "Facility")
+                        .WithMany()
+                        .HasForeignKey("FacilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WatchdogApi.Models.Requestor", "Requestor")
+                        .WithMany()
+                        .HasForeignKey("RequestorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("WatchdogApi.Models.Scope", "Scope")
+                        .WithMany()
+                        .HasForeignKey("ScopeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
